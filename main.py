@@ -10,9 +10,12 @@ botao = Pin (35, Pin.IN, Pin.PULL_UP)
 tempo = 0
 contador = 0
 pausa = 1
-led1.off()
-led2.off()
-led3.off()
+
+def apagar():
+    led1.off()
+    led2.off()
+    led3.off()
+
 i = 0
 
 while True:
@@ -37,18 +40,33 @@ while True:
 
 
     if contador == 1:
+        apagar()
         led1.on()
-        led2.off()
-        led3.off()
 
     if contador == 2:
+        apagar()
         led2.on()
-        led1.off()
-        led3.off()
 
     if contador == 3:
+        apagar()
         led3.on()
-        led2.off()
-        led1.off()
+
+    elif contador > 3:
+        s = True
+        while s == True:
+            apagar()
+            led3.on()
+            time.sleep(0.1)
+            apagar()
+            time.sleep(0.1)
+            led2.on()
+            time.sleep(0.1)
+            apagar()
+            time.sleep(0.1)
+            led1.on()
+            time.sleep(0.1)
+            if botao.value() == 1:
+                s = False
+
 
     contador = 0
